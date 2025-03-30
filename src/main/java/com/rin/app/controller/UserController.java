@@ -31,7 +31,7 @@ public class UserController {
 	
 	@PostMapping("add")
 	public String addUser(@Valid @ModelAttribute("user") User user, 
-	                      BindingResult bindingResult, Model model) {
+	                      BindingResult bindingResult, Model model) throws Exception {
 		System.out.println("Post add user");
 		
 	    if (bindingResult.hasErrors()) {
