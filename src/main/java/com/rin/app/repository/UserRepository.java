@@ -8,7 +8,7 @@ import com.rin.app.entity.User;
 
 
 
-@Repository
+
 public interface  UserRepository extends JpaRepository<User, Long> {
 	
 }

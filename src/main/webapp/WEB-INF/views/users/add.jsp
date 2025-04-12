@@ -9,7 +9,7 @@
 <body>
     <h1>Add User</h1>
 
-    <form:form action="add" modelAttribute="user" method="post">
+    <form:form action="add" modelAttribute="requestBody" method="post">
         Name: <form:input path="name" />
         <form:errors path="name" cssStyle="color: red" /><br>
 

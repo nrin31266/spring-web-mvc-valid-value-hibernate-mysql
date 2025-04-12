@@ -9,11 +9,15 @@
 </head>
 <body>
 	<h1>List of Users</h1>
+	<button
+		onclick="window.location.href='${pageContext.request.contextPath}/users/add'">
+		Add User</button>
+
 	<div style="padding: 8px; background-color: teal;">
-	<c:forEach var="user" items="${users}">
-		<c:set var="user" value="${user}" scope="request"/>
-		<jsp:include page="../components/userCard.jsp"/>
-	</c:forEach>
+		<c:forEach var="user" items="${users}">
+			<c:set var="user" value="${user}" scope="request" />
+			<jsp:include page="../components/userCard.jsp" />
+		</c:forEach>
 	</div>
 </body>
 </html>

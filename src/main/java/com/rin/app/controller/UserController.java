@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.rin.app.dto.CreateUserRequest;
 import com.rin.app.entity.User;
 import com.rin.app.service.UserService;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/users")
+@Slf4j
 public class UserController {
 	@Autowired
 	UserService userService;
@@ -24,23 +27,24 @@ public class UserController {
 	@GetMapping("add")
 	public String addUserPage(Model model) {
 	    System.out.println("Get page add User");
-	    model.addAttribute("user", new User());
+	    model.addAttribute("requestBody", new User());
 	    return "users/add";
 	}
 
 	
 	@PostMapping("add")
-	public String addUser(@Valid @ModelAttribute("user") User user, 
-	                      BindingResult bindingResult, Model model) throws Exception {
+	public String addUser(@Valid @ModelAttribute("requestBody") CreateUserRequest requestBody, 
+	                      BindingResult bindingResult, Model model)  {
 		System.out.println("Post add user");
 		
 	    if (bindingResult.hasErrors()) {
-	        model.addAttribute("user", user); 
+	    	System.err.println("Create user thrown error");
+	        model.addAttribute("user", requestBody); 
 	        return "users/add"; 
 	    }
 
-	    System.out.println("Birthday received: " + user.getBirthday());
-	    userService.saveUser(user);
+	    
+	    userService.saveUser(requestBody);
 	    return "redirect:/users";
 	}
 
